@@ -26,6 +26,7 @@ const getUser = async () => {
   return alluser;
 };
 const findId = async (userid) => {
+  console.log("🚀 ~ findId ~ :", User.findById(userid).populate("blogs"))
   return await User.findById(userid).populate("blogs");
 };
 const userupdate = async (userid, body) => {

@@ -1,7 +1,7 @@
-const { Schema, model, mongoose } = require("mongoose");
+const  mongoose  = require("mongoose");
 const bcrypt = require('bcrypt')
 
-const userSchema = new Schema({
+const userSchema =  new mongoose.Schema({
   Username: {
     type: String,
   },
@@ -11,10 +11,10 @@ const userSchema = new Schema({
   Password: {
     type: String,
   },
-  blogs: {
+  blogs: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Blog",
-  }
+  }]
 },
   {
     timestamps: true,
@@ -34,6 +34,6 @@ userSchema.pre('save', async function (next) {
 });
 
 
-const User = model("User", userSchema);
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;

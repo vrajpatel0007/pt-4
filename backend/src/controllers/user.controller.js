@@ -35,18 +35,29 @@ const register = async (req, res) => {
 };
 
 
-
-
-const profile = async (req, res) => {
+// list_User
+const userlist = async (req, res) => {
+  console.log(
+    "==================================== list_User ===================================="
+  );
   try {
-    const user = await user_service.findId(req.user._id)
-    console.log("🚀 ~ profile ~ user:", user);
-    return res.status(200).json({ message: "User Profile", user: user });
+    const user = await user_service.getUser();
+    return res.status(200).json({ message: "All user ", user: user });
   } catch (error) {
-    return res.status(400).json({ message: error.message }); 
+    return res.status(404).json({ message: error.message });
   }
 };
 
+const profile = async (req, res) => {
+  try {
+    const user = await user_service.findId(req.user._id);
+    console.log("🚀 ~ profile ~ user:", user); // Log the populated user data
+    return res.status(200).json({ message: "User Profile", user: user });
+  } catch (error) {
+    console.log(error); // Log the error if any
+    return res.status(400).json({ message: error.message });
+  }
+};
 
 
 
@@ -119,8 +130,7 @@ const login = async (req, res) => {
     }
     const payload = {
       _id: user._id,
-      email: user.Email,
-      Rol: user.Rol
+      email: user.Email
     };
     console.log("🚀 ~ login ~ payload.email:", payload);
     const token = jwt.sign(payload, process.env.SECRET_key, {
@@ -175,4 +185,5 @@ module.exports = {
   usersdelete,
   login,
   updatepassword,
+  userlist
 };

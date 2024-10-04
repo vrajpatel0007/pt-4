@@ -11,7 +11,7 @@ router.put("/userupdate", authUser, user_controller.userupdate);
 router.delete("/usersdelete", authUser, user_controller.usersdelete);
 router.post("/login", user_controller.login);
 router.put("/updatepassword", authUser, user_controller.updatepassword);
-
+router.get("/list", authUser, user_controller.userlist);
 
 
 

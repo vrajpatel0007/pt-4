@@ -5,7 +5,7 @@ const createblog = async (body) => {
 }
 
 const list = async () => {
-    return await Blog.find()
+    return await Blog.find().populate("user");
 }
 
 const deleteblog = async (blogId) => {
