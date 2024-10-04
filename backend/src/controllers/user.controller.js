@@ -21,7 +21,7 @@ const register = async (req, res) => {
     const body = {
       Username: reqbody.Username,
       Email: reqbody.Email,
-      Password: reqbody.Password
+      Password: bcrpass
     }
     console.log("🚀 ~ register ~ body:", body)
     const user = await user_service.register(body);
